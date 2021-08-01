@@ -1,0 +1,129 @@
+<div class="container py-3">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Product Management</h2>
+    </div>
+
+    <div class="col ml-auto text-right">
+      <button
+        type="button"
+        (click)="onAddProduct()"
+        class="btn btn-outline-success"
+      >
+        Add Product
+      </button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let item of products">
+      <div class="card mb-3">
+        <div class="card-body">
+          <img
+            src="{{ item.image }}"
+            alt="Girl in a jacket"
+            width="150px"
+            height="150px"
+          />
+          <hr />
+          <a class="card-title">{{ item.name }}</a>
+          <p class="card-subtitle">{{ item.desc }}</p>
+          <hr />
+          <p class="card-subtitle">Price: {{ item.price }}</p>
+          <br />
+          <p class="card-subtitle">Quntity: {{ item.quntity }}</p>
+
+          <br />
+
+          <p>Total Price:{{ item.price * item.quntity }}</p>
+          <hr />
+          <button
+            type="button"
+            (click)="onEditProduct(item)"
+            class="btn btn-sm btn-outline-primary mr-2"
+          >
+            Edit
+          </button>
+          &nbsp;
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-danger"
+            (click)="onDeleteProduct(item._id)"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade show" [class.show]="showModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          {{ editMode ? "Update" : "Add" }}
+          Product
+        </h5>
+        <button
+          (click)="onCloseModal()"
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form [formGroup]="productForm" (ngSubmit)="onProSubmit()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Enter Name</label>
+            <input type="text" class="form-control" formControlName="name" />
+          </div>
+
+          <div class="form-group">
+            <label>Enter Decsription</label>
+            <input type="text" class="form-control" formControlName="desc" />
+          </div>
+
+          <div class="form-group">
+            <label>Enter Image URL</label>
+            <input type="text" class="form-control" formControlName="image" />
+          </div>
+
+          <div class="form-group">
+            <label>Enter Price</label>
+            <input type="number" class="form-control" formControlName="price" />
+          </div>
+
+          <div class="form-group">
+            <label>Enter Quntity</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="quntity"
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            (click)="onCloseModal()"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {{ editMode ? "Update Product" : "Add Product" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="signup-form">
+  <form>
+    <h2>Login</h2>
+    <hr />
+    <div class="form-group">
+      <input
+        type="email"
+        class="form-control"
+        name="email"
+        placeholder="Username"
+        required="required"
+        #username
+      />
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        placeholder="Password"
+        #pass
+      />
+    </div>
+
+    <div class="form-group">
+      <button
+        type="button"
+        class="btn btn-success btn-lg btn-block"
+        (click)="check(username.value, pass.value)"
+      >
+        Login
+      </button>
+      <h3>{{ msg }}</h3>
+    </div>
+  </form>
+</div>
